@@ -1,0 +1,3 @@
+rails generate controller Users
+rails generate controller Stores
+rails generate controller Ratings
