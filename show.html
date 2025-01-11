@@ -1,0 +1,16 @@
+<h1><%= @store.name %></h1>
+<p><strong>Address:</strong> <%= @store.address %></p>
+<p><strong>Overall Ratings:</strong> <%= @store.ratings.average(:score).to_f.round(2) %></p>
+
+<h2>Ratings</h2>
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Rating</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @store.ratings.includes(:user).each do |rating| %>
+      <tr>
+        <
