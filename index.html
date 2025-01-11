@@ -1,0 +1,34 @@
+<h1>Stores</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th><%= link_to "Name", stores_path(sort: "name") %></th>
+      <th><%= link_to "Address", stores_path(sort: "address") %></th>
+      <th>Overall Ratings</th>
+      <th>My Submitted Rating</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @stores.each do |store| %>
+      <tr>
+        <td><%= store.name %></td>
+        <td><%= store.address %></td>
+        <td><%= store.ratings.average(:score).to_f.round(2) %></td>
+        <td>
+          <% rating = @ratings.find { |r| r.store_id == store.id } %>
+          <% if rating %>
+            <%= rating.score %>
+            <%= link_to 'Edit Rating', edit_rating_path(rating) %>
+          <% else %>
+            <%= link_to 'Rate', new_rating_path(store_id: store.id) %>
+          <% end %>
+        </td>
+        <td><%= link_to 'View', store_path(store) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Logout', logout_path %>
